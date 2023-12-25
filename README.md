@@ -3,6 +3,8 @@
 - This is a simple Application which uses Todoist application's **webhook** to fetch the events. Which can be used for event based architecture in the later stages.
  - Currently it received the data from todoist and pushes it to AWS SQS.
  - In the later projects we will consume this SQS messages using AWS Lambda to process and save it to Dynamo db for archiving and send email(AWS SES) to user everyday EOD as a Day's review of Todoist activity.
+-  Updated with dockerfile to reuse 
+  - docker run -p 80:8080 todoistwebhook_v1
 
 
  Steps :-
