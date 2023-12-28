@@ -1,9 +1,5 @@
 package controller;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Logger;
-
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -12,6 +8,9 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Handler for requests to Lambda function.
@@ -26,7 +25,7 @@ public class App implements RequestHandler<APIGatewayProxyRequestEvent, APIGatew
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent()
                 .withHeaders(headers);
         LambdaLogger logger = context.getLogger();
-        logger.log("Received the Message from Gateway");
+        logger.log("Received the Message from Gateway"+input);
         try {
             AmazonSQS sqs = AmazonSQSClientBuilder.defaultClient();
             SendMessageRequest send_msg_request = new SendMessageRequest()
@@ -40,7 +39,7 @@ public class App implements RequestHandler<APIGatewayProxyRequestEvent, APIGatew
                     .withBody(input.getBody());
 
         } catch (Exception e) {
-            logger.log("Failed to Process the Message from Gateway " + input.getBody());
+            logger.log("Failed to Process the Message from Gateway " + input.getBody()+"\n\n"+ e.getMessage());
             return response
                     .withBody(e.getMessage())
                     .withStatusCode(500);
