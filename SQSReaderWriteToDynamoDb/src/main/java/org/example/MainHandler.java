@@ -48,6 +48,7 @@ public class MainHandler {
                 sendNotification("Event with Id: " + itemDetails.getItemId() + " with eventName " + itemDetails.getEvent_name() + " processed Successfully");
                 System.out.println("SNS Notification sent successfully");
             } catch (JsonProcessingException e) {
+                sendNotification("Exception occured");
                 throw new RuntimeException(e);
             }
 

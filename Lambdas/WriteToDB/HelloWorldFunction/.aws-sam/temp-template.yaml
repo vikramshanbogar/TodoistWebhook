@@ -1,0 +1,11 @@
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 300
+      MemorySize: 128
+      Handler: customHandler.App::handleRequest
+      CodeUri: C:\Development\codebase\TodoistWebhook\Lambdas\WriteToDB\HelloWorldFunction
+      Runtime: java17
+      Architectures:
+        - x86_64

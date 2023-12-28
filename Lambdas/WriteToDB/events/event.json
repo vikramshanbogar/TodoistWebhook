@@ -1,0 +1,40 @@
+{
+  messageId: 61a36bf6-fde0-456f-be3c-391b9ee77e63,
+  receiptHandle: AQEBDeVhUxtpRbhnNgXHJvVgCoIdQFJEquz2T0G5QOP6r5OIgZj3W1hmhnm3sqboA6JuWEbVJGDDl4Ob6xoVsb4QMxobcJXRVH2Tg1Yl1VoCYccKJrefgdrcKiQa6vrv2fy4WnO9x9LhEoA/wikWSu43k0
+  +
+  fr2lrj9vz3F7OwpB3AHGIfGiyOa60tPwoV4Ib6E7
+  +
+  reLPFqJ8pTTLm5
+  +
+  7PyDb8kn/0Z8GmQ2IEwK28EwaaFogPcwFnu/5iWnFB7S8MzpGztTGVlPjlQnMMh3cLGoPov5oMY5bnDUlsPkTZC9PvnvGqmxe7TCDBMl738c
+  +
+  dyP3IkFEJGd2kgytNFVWfbdDZUFVJFqWRd
+  +
+  S8iNL9Tb/QFJrwvl1EmeS4IsLcmt5ek0g25ZsTBHupto
+  +
+  jyCikMSFCQ==,
+  eventSourceARN: arn
+  :
+  aws: sqs
+  :
+  ap-south-1: 309305317617
+  :
+  TodoistSqs,
+  eventSource: aws
+  :
+  sqs,
+  awsRegion: ap-south-1,
+  body: Hi
+  Vikram,
+  md5OfBody: 32b77502dfd8691c03e3268f7331ab2e,
+  attributes: {
+    ApproximateReceiveCount=2,
+    SentTimestamp=1703767319383,
+    SenderId=AIDAUQBAITDYSJR5YNX4S,
+    ApproximateFirstReceiveTimestamp=1703767319386
+  },
+  messageAttributes: {}
+}
+Received SQSMessage:- {messageId: 61a36bf6-fde0-456f-be3c-391b9ee77e63, receiptHandle: AQEBDeVhUxtpRbhnNgXHJvVgCoIdQFJEquz2T0G5QOP6r5OIgZj3W1hmhnm3sqboA6JuWEbVJGDDl4Ob6xoVsb4QMxobcJXRVH2Tg1Yl1VoCYccKJrefgdrcKiQa6vrv2fy4WnO9x9LhEoA/wikWSu43k0+fr2lrj9vz3F7OwpB3AHGIfGiyOa60tPwoV4Ib6E7+reLPFqJ8pTTLm5+7PyDb8kn/0Z8GmQ2IEwK28EwaaFogPcwFnu/5iWnFB7S8MzpGztTGVlPjlQnMMh3cLGoPov5oMY5bnDUlsPkTZC9PvnvGqmxe7TCDBMl738c+dyP3IkFEJGd2kgytNFVWfbdDZUFVJFqWRd+S8iNL9Tb/QFJrwvl1EmeS4IsLcmt5ek0g25ZsTBHupto+jyCikMSFCQ==, eventSourceARN: arn: aws: sqs:ap-south-1: 309305317617: TodoistSqs, eventSource: aws:sqs, awsRegion: ap-south-1, body: Hi Vikram, md5OfBody: 32b77502dfd8691c03e3268f7331ab2e, attributes: {ApproximateReceiveCount=2, SentTimestamp=1703767319383, SenderId=AIDAUQBAITDYSJR5YNX4S, ApproximateFirstReceiveTimestamp=1703767319386}, messageAttributes: {
+}
+}
