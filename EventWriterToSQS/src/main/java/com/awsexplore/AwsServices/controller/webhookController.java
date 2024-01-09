@@ -14,6 +14,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+
 @RestController
 public class webhookController {
 
@@ -27,15 +31,15 @@ public class webhookController {
         System.out.println(code.getUser_id());
 
         // pushing data to SQS for further processing
-
-        {
-            AmazonSQS sqs = AmazonSQSClientBuilder.defaultClient();
-            SendMessageRequest send_msg_request = new SendMessageRequest()
-                    .withQueueUrl("https://sqs.ap-south-1.amazonaws.com/309305317617/TodoistSqs")
-                    .withMessageBody(requestBody)
-                    .withDelaySeconds(5);
-            sqs.sendMessage(send_msg_request);
-        }
+        String body = "{\"content\":\"" + code.getEvent_data().getContent() + "\"}";
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://api.todoist.com/rest/v2/tasks"))
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .header("Authorization", "Bearer 2c1c5d9a3196eaab20fc8643e2f93c56dba0fa19")
+                .POST(HttpRequest.BodyPublishers.ofString(body))
+                .headers()
+                .build();
         return new ResponseEntity<String>(requestBody, HttpStatus.OK);
     }
 }
