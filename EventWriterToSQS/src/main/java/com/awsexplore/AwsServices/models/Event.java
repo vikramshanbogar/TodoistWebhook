@@ -2,7 +2,7 @@ package com.awsexplore.AwsServices.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Codebeautify {
+public class Event {
 @JsonIgnore
  Event_data Event_dataObject;
  private String event_name;

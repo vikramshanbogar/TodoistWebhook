@@ -1,45 +1,45 @@
 package com.awsexplore.AwsServices.controller;
 
-import org.springframework.http.HttpStatus;
+
+import java.io.IOException;
+
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amazonaws.services.sqs.AmazonSQS;
-import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
-import com.amazonaws.services.sqs.model.SendMessageRequest;
-import com.awsexplore.AwsServices.models.Codebeautify;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.awsexplore.AwsServices.models.Event;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 @RestController
 public class webhookController {
 
     @PostMapping
     public ResponseEntity<String> print(@RequestBody String requestBody)
-            throws JsonMappingException, JsonProcessingException {
+            throws IOException, InterruptedException {
         System.out.println("###### Webhook Data Received from Todoist ##### \n" + requestBody);
 
         ObjectMapper mapper = new ObjectMapper();
-        Codebeautify code = mapper.readValue(requestBody, Codebeautify.class);
+        Event code = mapper.readValue(requestBody, Event.class);
         System.out.println(code.getUser_id());
 
-        // pushing data to SQS for further processing
-        String body = "{\"content\":\"" + code.getEvent_data().getContent() + "\"}";
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://api.todoist.com/rest/v2/tasks"))
-                .header("Content-Type", "application/x-www-form-urlencoded")
-                .header("Authorization", "Bearer 2c1c5d9a3196eaab20fc8643e2f93c56dba0fa19")
-                .POST(HttpRequest.BodyPublishers.ofString(body))
-                .headers()
-                .build();
-        return new ResponseEntity<String>(requestBody, HttpStatus.OK);
+        Unirest.setTimeouts(0, 0);
+        try {
+            HttpResponse<String> response = Unirest.post("https://api.todoist.com/rest/v2/tasks")
+                    .header("Content-Type", "application/json")
+                    .header("Authorization", "Bearer 2c1c5d9a3196eaab20fc8643e2f93c56dba0fa19")
+                    .header("Cookie",
+                            "tduser=v4.public.eyJ1c2VyX2lkIjogNDU5MjUwMTAsICJleHAiOiAiMjAyNC0wMS0yM1QwNDowODowOSswMDowMCJ9-Mr_wMugAniYeW0wTPC_q-2Kf0CvJe2yR8qIoe1O_BmHf4LhmZ0XSv1gMdRRr_jEH8qGEKf_At2g4DzR0FdZDA; csrf=20b947f2e3f64ec4b20fe0a3bbc55a9c")
+                    .body("{\r\n    \"content\": \"VIkram Jan\",\r\n    \"labels\": [\"09-01-2023\"],\r\n    \"project_id\":2324810916\r\n}")
+                    .asString();
+        } catch (UnirestException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return new ResponseEntity<String>(requestBody, HttpStatusCode.valueOf(200));
     }
 }
