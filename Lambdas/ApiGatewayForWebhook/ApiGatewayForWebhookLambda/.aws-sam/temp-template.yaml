@@ -4,8 +4,8 @@ Resources:
     Properties:
       Timeout: 300
       MemorySize: 128
-      Handler: controller.App::handleRequest
-      CodeUri: C:\Users\Vikram\Downloads\Lambdas\LambdasTodoist\ApiGatewayForWebhook\ApiGatewayForWebhookLambda
+      Handler: controller.App
+      CodeUri: C:\Development\Codebase\TodoistWebhook\Lambdas\ApiGatewayForWebhook\ApiGatewayForWebhookLambda
       Runtime: java17
       Architectures:
         - x86_64
